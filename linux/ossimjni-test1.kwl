@@ -65,10 +65,10 @@ test1.description: Test ossimjni OssimInfo class and associated bindings.
 test1.enabled: 1
 
 // Commands to generate expected results:
-test1.expected_results_command0: java -cp $(OSSIM_DEV_HOME)/ossimjni/java/build/lib/ossimjni.jar org.ossim.jni.apps.OssimInfo $(OSSIM_BATCH_TEST_DATA)/public/tif/Iowa-utm.tif > $(OBT_EXP_DIR)/info.txt
+test1.expected_results_command0: java -Djava.library.path=$(OSSIM_DEV_HOME)/ossimjni/java/build/lib -cp $(OSSIM_DEV_HOME)/ossimjni/java/build/lib/ossimjni.jar org.ossim.jni.apps.OssimInfo $(OSSIM_BATCH_TEST_DATA)/public/tif/Iowa-utm.tif > $(OBT_EXP_DIR)/info.txt
 
 // The actual commands to test:
-test1.test_command0: java -cp $(OSSIM_DEV_HOME)/ossimjni/java/build/lib/ossimjni.jar org.ossim.jni.apps.OssimInfo $(OSSIM_BATCH_TEST_DATA)/public/tif/Iowa-utm.tif > $(OBT_OUT_DIR)/info.txt
+test1.test_command0: java -Djava.library.path=$(OSSIM_DEV_HOME)/ossimjni/java/build/lib -cp $(OSSIM_DEV_HOME)/ossimjni/java/build/lib/ossimjni.jar org.ossim.jni.apps.OssimInfo $(OSSIM_BATCH_TEST_DATA)/public/tif/Iowa-utm.tif > $(OBT_OUT_DIR)/info.txt
 
 // Post process commands for diffs and stuff:
 test1.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/info.txt $(OBT_OUT_DIR)/info.txt
