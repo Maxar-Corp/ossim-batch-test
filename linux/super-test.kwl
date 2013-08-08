@@ -64,3 +64,5 @@ test_config_file6: wrap-test.kwl
 test_config_file7: fusion-test1.kw1
 test_config_file8: image-geometry.kwl
 test_config_file9: genras-writer-test.kwl
+test_config_file10: ossim-chipper-test.kwl
+
