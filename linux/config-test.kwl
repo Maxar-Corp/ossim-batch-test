@@ -62,6 +62,7 @@ test1.expected_results_command0: ossim-info --configuration > $(OBT_EXP_DIR)/con
 test1.test_command0: ossim-info --configuration > $(OBT_OUT_DIR)/config.txt
 
 // Post process commands for diffs and stuff:
+// Note: "-I version" to stop fail on version string that has the build date in it.
 test1.postprocess_command0: $(DIFF_CMD) -I version $(OBT_EXP_DIR)/config.txt $(OBT_OUT_DIR)/config.txt
 
 // End test1:
