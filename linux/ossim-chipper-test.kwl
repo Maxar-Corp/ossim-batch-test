@@ -130,10 +130,6 @@ test4.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/t4.his $(OBT_OUT_DIR)/t4.
 // End test4:
 // ---
 
-
-
-
-
 // ---
 // Begin test5:
 // Note no geometry with "chip" mode so no -p in ossim-info.
@@ -166,3 +162,73 @@ test5.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/t5.his $(OBT_OUT_DIR)/t5.
 // ---
 // End test5:
 // ---
+
+
+// ---
+// Begin test6:
+// ---
+test6.name: test6
+test6.description: Test ossim-chipper ortho mode on, rpc images, pan sharpened, with polygon remapper in chain.
+test6.enabled: 1
+
+// Commands to generate expected results:
+
+test6.expected_results_command0: ossim-chipper --op ortho --clip-poly-lat-lon "(-42.826019566439,147.293941362084468),(-42.822529953243581,147.297524165910716),(-42.822242150093437,147.308125338875925),(-42.826271394195437,147.311757222206637),(-42.828501868609038,147.306898351264209),(-42.834042079249286,147.307192828291022),(-42.833358546767698,147.297229688883874),(-42.829113450303090,147.292518056454895),(-42.826019566439,147.293941362084468)" --histogram-op auto-minmax --cut-center-llwh -42.828034188490058 147.304419836288560 4096 4096 --scale-to-8-bit -w tiff_tiled_band_separate $(OSSIM_BATCH_TEST_DATA)/geoeye1/GE1_Hobart_GeoStereo_NITF-NCD/001508507_01000SP00332258/5V090205P0001912264B220000100282M_001508507/Volume1/5V090205P0001912264B220000100282M_001508507.ntf $(OBT_EXP_DIR)/t6.tif
+
+test6.expected_results_command1: ossim-preproc -r --ot ossim_kakadu_nitf_j2k --create-histogram $(OBT_EXP_DIR)/t6.tif
+
+test6.expected_results_command2: ossim-info -d -i -p $(OBT_EXP_DIR)/t6.tif > $(OBT_EXP_DIR)/t6-info.txt
+
+// The actual commands to test:
+
+test6.test_command0: ossim-chipper --op ortho --histogram-op auto-minmax --cut-center-llwh -42.883986392005788 147.331309643650911 512 512 --scale-to-8-bit -w tiff_tiled_band_separate $(OSSIM_BATCH_TEST_DATA)/geoeye1/GE1_Hobart_GeoStereo_NITF-NCD/001508507_01000SP00332258/5V090205P0001912264B220000100282M_001508507/Volume1/5V090205P0001912264B220000100282M_001508507.ntf $(OBT_OUT_DIR)/t6.tif
+
+test6.test_command1: ossim-preproc -r --ot ossim_kakadu_nitf_j2k --create-histogram-fast $(OBT_OUT_DIR)/t6.tif
+
+test6.test_command2: ossim-info -d -i -p $(OBT_OUT_DIR)/t6.tif > $(OBT_OUT_DIR)/t6-info.txt
+
+// Post process commands for diffs and stuff:
+
+test6.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/t6-info.txt $(OBT_OUT_DIR)/t6-info.txt
+test6.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/t6.his $(OBT_OUT_DIR)/t6.his
+
+// ---
+// End test6:
+// ---
+
+
+
+// ---
+// Begin test7:
+// ---
+test6.name: test7
+test6.description: Test ossim-chipper --op hillshade mode:
+test6.enabled: 1
+
+// Commands to generate expected results:
+
+test7.expected_results_command0: ossim-chipper --op hillshade --color 240 210 180 $(OSSIM_BATCH_TEST_DATA)/public/elevation/srtm/1arc/N37W123.hgt $(OBT_EXP_DIR)/t7.tif
+
+test7.expected_results_command1: ossim-preproc -r -o --ch $(OBT_EXP_DIR)/t7.tif
+
+test7.expected_results_command2: ossim-info -d -i -p $(OBT_EXP_DIR)/t7.tif > $(OBT_EXP_DIR)/t7-info.txt
+
+// The actual commands to test:
+
+test7.test_command0: ossim-chipper --op hillshade --color 240 210 180 $(OSSIM_BATCH_TEST_DATA)/public/elevation/srtm/1arc/N37W123.hgt $(OBT_OUT_DIR)/t7.tif
+
+test7.test_command1: ossim-preproc -r -o --ch $(OBT_OUT_DIR)/t7.tif
+
+test7.test_command2: ossim-info -d -i -p $(OBT_OUT_DIR)/t7.tif > $(OBT_OUT_DIR)/t7-info.txt
+
+// Post process commands for diffs and stuff:
+
+test7.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/t7-info.txt $(OBT_OUT_DIR)/t7-info.txt
+test7.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/t7.his $(OBT_OUT_DIR)/t7.his
+
+// ---
+// End test7:
+// ---
+
+
+
