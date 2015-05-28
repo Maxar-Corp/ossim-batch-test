@@ -151,3 +151,26 @@ test5.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/test5.txt $(OBT_OUT_DIR)/
 // End: test5
 // ---
  
+// ---
+// Begin: test6
+// ---
+test6.name: test6
+test6.description: Test ossimRadarSat2Model not initializing theRefPt when grid points don't fall on image center.
+test6.enabled: 1
+
+// Commands to generate expected results:
+
+test6.expected_results_command0: ossim-info -d -i -p $(OSSIM_BATCH_TEST_DATA)/RS2_OK2902_PK38584_DK38757_EH4_20081101_184000_HH_SGF/imagery_HH.tif > $(OBT_EXP_DIR)/test6-info.txt
+
+// The actual commands to test:
+
+test6.test_command0: ossim-info -d -i -p $(OSSIM_BATCH_TEST_DATA)/RS2_OK2902_PK38584_DK38757_EH4_20081101_184000_HH_SGF/imagery_HH.tif > $(OBT_OUT_DIR)/test6-info.txt
+
+// Post process commands for diffs and stuff: 
+
+test6.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/test6-info.txt $(OBT_OUT_DIR)/test6-info.txt
+
+// ---
+// End: test6
+// ---
+ 
